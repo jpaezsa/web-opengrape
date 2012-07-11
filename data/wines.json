@@ -1,0 +1,27 @@
+{
+  "dom-perignon-1993": {
+    "title": "Dom Perignon 1993",
+    "description": "Dom Perignon is a brand of vintage Champagne.",
+    "image": "http://farm6.staticflickr.com/5162/5297095608_c338a343fd_b.jpg",
+    "grapes": ["chardonnay", "pinot-noir"]
+  },
+  "grand-vin-de-leoville-1975": {
+    "title": "Grand Vin de Leoville 1975",
+    "description":
+      "A wine from the Saint-Julien appellation of Bordeaux, France.",
+    "image": "http://farm1.staticflickr.com/15/21340684_1fd280bb90_b.jpg",
+    "grapes": ["cabernet-sauvignon", "merlot"]
+  },
+  "rancho-zabaco-2007": {
+    "title": "Rancho Zabaco 2007",
+    "description": "A red wine from the Sonoma County wine region.",
+    "image": "http://farm4.staticflickr.com/3660/3599754414_6a3f0c2c97_b.jpg",
+    "grapes": ["zinfandel"]
+  },
+  "bouchard-volnay-2002": {
+    "title": "Bouchard Volnay 2002",
+    "description": "A white wine from Burgundy, France.",
+    "image": "http://farm5.staticflickr.com/4077/4800524537_d946e79c6d_b.jpg",
+    "grapes": ["pinot-noir"]
+  }
+}

@@ -20,16 +20,46 @@
 * DEALINGS IN THE SOFTWARE.
 */
 
+// use the Express framework, and expect to read files
 var express = require('express');
+var fs = require('fs');
 
+// create application
 var app = express.createServer();
 
-app.use(express.static(__dirname + '/mocks'));
+// load datasets
+var wines = JSON.parse(fs.readFileSync('data/wines.json')),
+    grapes = JSON.parse(fs.readFileSync('data/grapes.json'));
 
-app.get('/', function(req, res){
-  res.send('It works. Drink wine.');
+// serve wine end points
+app.get('/wines/:wine', function(request, response) {
+  var wine = wines[request.params.wine];
+  if (wine) {
+    response.send('Wine: ' + wine.title);
+  } else {
+    response.send(404);
+  }
 });
 
+// serve grape end points
+app.get('/grapes/:grape', function(request, response) {
+  var grape = grapes[request.params.grape];
+  if (grape) {
+    response.send('Grape: ' + grape.title);
+  } else {
+    response.send(404);
+  }
+});
+
+// serve default end point, redirect to first wine
+app.get('/', function(request, response){
+  for (wine in wines) {
+    response.redirect("/wines/" + wine);
+    return;
+  }
+});
+
+// spin up server
 var port = process.env.PORT || 3000;
 app.listen(port, function() {
   console.log("Listening on " + port);
