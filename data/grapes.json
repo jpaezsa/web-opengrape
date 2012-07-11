@@ -1,13 +1,13 @@
 {
   "chardonnay": {
     "title": "Chardonnay",
-    "description": "A green-skinned grape variety used to make white wine.",
+    "description": "A green-skinned grape variety used to make white wine",
     "image": "http://farm5.staticflickr.com/4123/4804890542_31c006cd6a.jpg",
     "color": "white"
   },
   "pinot-noir": {
     "title": "Pinot Noir",
-    "description": "A black wine grape variety of the species Vitis vinifera.",
+    "description": "A black wine grape variety of the species Vitis vinifera",
     "image": "http://farm2.staticflickr.com/1259/923930277_3ee185ea40.jpg",
     "color": "red"
   },

@@ -24,8 +24,25 @@
 var express = require('express');
 var fs = require('fs');
 
+// canonical server host
+var server_host = process.env.SERVER_HOST;
+
+// utility function to return object's canonical URL
+var objectUrl = function (type, key) {
+  return server_host + '/' + type + 's/' + key;
+}
+
 // create application
 var app = express.createServer();
+
+// configure templating engine
+app.configure(function(){
+  app.set('views', __dirname + '/views');
+  app.set('view engine', 'ejs');
+  app.locals({
+    objectUrl: objectUrl
+  });
+});
 
 // load datasets
 var wines = JSON.parse(fs.readFileSync('data/wines.json')),
@@ -35,7 +52,8 @@ var wines = JSON.parse(fs.readFileSync('data/wines.json')),
 app.get('/wines/:wine', function(request, response) {
   var wine = wines[request.params.wine];
   if (wine) {
-    response.send('Wine: ' + wine.title);
+    wine.id = request.params.wine;
+    response.render('wine', wine)
   } else {
     response.send(404);
   }
@@ -45,7 +63,8 @@ app.get('/wines/:wine', function(request, response) {
 app.get('/grapes/:grape', function(request, response) {
   var grape = grapes[request.params.grape];
   if (grape) {
-    response.send('Grape: ' + grape.title);
+    grape.id = request.params.grape;
+    response.render('grape', grape)
   } else {
     response.send(404);
   }
@@ -54,7 +73,7 @@ app.get('/grapes/:grape', function(request, response) {
 // serve default end point, redirect to first wine
 app.get('/', function(request, response){
   for (wine in wines) {
-    response.redirect("/wines/" + wine);
+    response.redirect(objectUrl('wine', wine));
     return;
   }
 });
@@ -62,5 +81,5 @@ app.get('/', function(request, response){
 // spin up server
 var port = process.env.PORT || 3000;
 app.listen(port, function() {
-  console.log("Listening on " + port);
+  console.log('Listening on ' + port);
 });
