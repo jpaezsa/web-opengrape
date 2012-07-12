@@ -44,6 +44,18 @@
             content='<%= objectUrl('grape', grape) %>' />
     <% }); %>
 
+    <meta
+      name='viewport'
+      content=
+        'width=device-width,
+        maximum-scale=1,
+        minimum-scale=1,
+        initial-scale=1,
+        user-scalable=no'
+    />
+    <meta name='apple-mobile-web-app-capable' content='yes'>
+    <link rel='stylesheet' href='/opengrape.css' type='text/css' />
+    <script type='text/javascript' src='/opengrape.js'></script>
   </head>
   <body>
     <article>
@@ -57,6 +69,10 @@
         <%= description %>
       </p>
       <img src='<%= image %>' />
+      <footer>
+        <a class='prev' href='<%= objectUrl('wine', prev) %>'>Prev</a>
+        <a class='next' href='<%= objectUrl('wine', next) %>'>Next</a>
+      </footer>
     </article>
   </body>
 </html>
