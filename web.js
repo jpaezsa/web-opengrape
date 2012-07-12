@@ -25,7 +25,7 @@ var express = require('express');
 var fs = require('fs');
 
 // canonical server host
-var server_host = process.env.SERVER_HOST;
+var server_host = process.env.APP_DOMAIN;
 
 // utility function to return object's canonical URL
 var objectUrl = function (type, key) {
@@ -47,6 +47,21 @@ app.configure(function(){
 // load datasets
 var wines = JSON.parse(fs.readFileSync('data/wines.json')),
     grapes = JSON.parse(fs.readFileSync('data/grapes.json'));
+
+// create linked list of wines; link first to last to wrap around
+var prev_wine = null;
+for (wine in wines) {
+  if (prev_wine) {
+    wines[wine].prev = prev_wine;
+    wines[prev_wine].next = wine;
+  }
+  prev_wine = wine;
+}
+for (wine in wines) {
+  wines[wine].prev = prev_wine;
+  wines[prev_wine].next = wine;
+  break;
+}
 
 // serve wine end points
 app.get('/wines/:wine', function(request, response) {
@@ -77,6 +92,9 @@ app.get('/', function(request, response){
     return;
   }
 });
+
+// static files, such as JavaScript and CSS
+app.use(express.static(__dirname + '/public'));
 
 // spin up server
 var port = process.env.PORT || 3000;
