@@ -25,7 +25,7 @@ var express = require('express');
 var fs = require('fs');
 
 // canonical server host
-var server_host = process.env.SERVER_HOST;
+var server_host = process.env.APP_DOMAIN;
 
 // utility function to return object's canonical URL
 var objectUrl = function (type, key) {
