@@ -56,13 +56,14 @@ window.addEventListener('load', function () {
 window.fbAsyncInit = function() {
   FB.init({
     appId: '435461749820612',
-    status: true,
     cookie: true
   });
-  FB.Event.subscribe('auth.statusChange', function(response) {
+  var updateButton = function(response) {
     document.getElementsByTagName('button')[0].innerHTML =
       response.authResponse ? 'Drink' : 'Login';
-  });
+  };
+  FB.getLoginStatus(updateButton, true);
+  FB.Event.subscribe('auth.statusChange', updateButton);
 };
 (function(d){
   var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
