@@ -7,8 +7,9 @@ client-side JS SDK to demonstrate simple Open Graph principles.
 This app is configured so as to use the Heroku cedar stack, as per
 http://devcenter.heroku.com/articles/nodejs
 
-If you want to run this application itself, you will need to change
-the Facebook application ID in `public/opengrape.js`:
+If you want to run this application yourself, you will need to change
+the Facebook application ID in `public/opengrape.js` to an ID that
+you have registered yourself at http://developers.facebook.com/apps:
 
     ...
     FB.init({
